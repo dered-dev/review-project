@@ -29,8 +29,14 @@ const request = (url, callback, method = 'GET', data = {}) => {
 const renderCards = () =>{
   request(SERVER_URLKODERS, buildPostCards);
   document.getElementById("closeForm").click();
+  clearForm()
 }
 
+const clearForm = () =>{
+  document.getElementById('titleInput').value = ""
+  document.getElementById('textInput').value = ""
+  document.getElementById('dateInput').value = ""
+}
 
 // Function buildPostCards
 const buildPostCards = (nodes, parent = 'listCards') => {
@@ -78,7 +84,9 @@ sendFormTrigger.addEventListener('click', function(e){
     'date': date,
   }
   request( SERVER_URLKODERS, renderCards, "POST", newKoder)
-  window.scrollTo(0,document.body.scrollHeight);
+  setTimeout(function(){
+    window.scrollTo(0,document.body.scrollHeight);
+  },1000)
 })
 
 
